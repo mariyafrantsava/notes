@@ -1,7 +1,17 @@
 import React, {useState} from 'react';
 import './add-note.scss';
+import {makeStyles} from "@material-ui/core/styles";
+import Button from '@material-ui/core/Button';
+import SaveIcon from '@material-ui/icons/Save';
 
 const AddNote = ({handleAddNote}) => {
+    const useStyles = makeStyles((theme) => ({
+        button: {
+            margin: theme.spacing(1),
+        },
+    }));
+    const classes = useStyles();
+
     const [noteText, setNoteText] = useState('');
 
     const handleChange = (event) => {
@@ -25,11 +35,15 @@ const AddNote = ({handleAddNote}) => {
             </textarea>
             <div className="note-footer">
                 <p>200 Remaining</p>
-                <button
-                    className="save"
-                    onClick={handleSaveClick}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    startIcon={<SaveIcon />}
+                    onClick={handleSaveClick}
+                >
                     Save
-                </button>
+                </Button>
             </div>
         </div>
     )

@@ -1,6 +1,7 @@
-import React, { useState }  from "react";
+import React, {useEffect, useState} from "react";
 import './app.scss';
 import NotesList from "../notes-list/notes-list";
+import SearchTag from "../search-tag/search-tag";
 
 const App = () => {
     const [notes, setNotes] = useState([
@@ -21,10 +22,27 @@ const App = () => {
             text: "My first note created 4!"
         },
         {
-            id: "3",
+            id: "4",
             text: "My first new note created!"
         },
     ]);
+
+    const [searchText, setSearchText] = useState('');
+    useEffect(() =>{
+        const savedNotes = JSON.parse(
+            localStorage.getItem('notes-data')
+        );
+        if(savedNotes){
+            setNotes(savedNotes);
+        }
+    }, []);
+
+    useEffect(() =>{
+        localStorage.setItem(
+            'notes-data',
+            JSON.stringify(notes)
+        );
+    }, [notes]);
 
     const addNote = (text) => {
         const newNote = {
@@ -41,8 +59,10 @@ const App = () => {
 
         return (
             <div className="container">
+                <SearchTag handleSearchNote={setSearchText}/>
                 <NotesList
-                    notes={notes}
+                    notes={notes.filter((note) =>
+                        note.text.toLocaleLowerCase().includes(searchText))}
                     handleAddNote={addNote}
                     handleDeleteNote={deleteNote}/>
             </div>
