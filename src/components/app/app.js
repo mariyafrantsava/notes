@@ -46,7 +46,7 @@ const App = () => {
 
     const addNote = (text) => {
         const newNote = {
-            id: 999,
+            id: notes.some((note) => Number(note.id) === notes.length - 1) ?  notes.length.toString() : 0,
             text: text
         }
         const newNotes = [...notes, newNote];
