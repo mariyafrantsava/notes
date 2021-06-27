@@ -7,27 +7,32 @@ const App = () => {
     const [notes, setNotes] = useState([
         {
             id: "0",
-            text: "My first note created 1!"
+            text: "My first note created 1!",
+            tags: ["cat", "cap"]
         },
         {
             id: "1",
-            text: "My first note created 2!"
+            text: "My first note created 2!",
+            tags: [" ", ""]
         },
         {
             id: "2",
-            text: "My first note created 3!"
+            text: "My first note created 3!",
+            tags: [" ", ""]
         },
         {
             id: "3",
-            text: "My first note created 4!"
+            text: "My first note created 4!",
+            tags: [" ", ""]
         },
         {
             id: "4",
-            text: "My first new note created!"
+            text: "My first new note!",
+            tags: [" ", ""]
         },
     ]);
 
-    const [searchText, setSearchText] = useState('');
+    const [searchTag, setSearchTag] = useState('');
     useEffect(() =>{
         const savedNotes = JSON.parse(
             localStorage.getItem('notes-data')
@@ -44,29 +49,33 @@ const App = () => {
         );
     }, [notes]);
 
-    const addNote = (text) => {
+    const addNote = (text, tags) => {
         const newNote = {
             id: notes.some((note) => Number(note.id) === notes.length - 1) ?  notes.length.toString() : 0,
-            text: text
+            text: text,
+            tags: tags
         }
         const newNotes = [...notes, newNote];
         setNotes(newNotes);
     }
-        const deleteNote = (id) => {
-            const newNotes = notes.filter((note) => note.id !== id);
-            setNotes(newNotes);
-        }
 
-        return (
-            <div className="container">
-                <SearchTag handleSearchNote={setSearchText}/>
-                <NotesList
-                    notes={notes.filter((note) =>
-                        note.text.toLocaleLowerCase().includes(searchText))}
-                    handleAddNote={addNote}
-                    handleDeleteNote={deleteNote}/>
-            </div>
-        );
+    const deleteNote = (id) => {
+        const newNotes = notes.filter((note) => note.id !== id);
+        setNotes(newNotes);
+    }
+
+    return (
+        <div className="container">
+            <SearchTag handleSearchNote={setSearchTag}/>
+            <NotesList
+                notes={
+                    notes.filter((note) =>
+                    note.tags.join('').toLocaleLowerCase().includes(searchTag))
+                }
+                handleAddNote={addNote}
+                handleDeleteNote={deleteNote}/>
+        </div>
+    );
 }
 
 export default App;

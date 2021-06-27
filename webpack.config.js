@@ -46,7 +46,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: "tradeUnionMKTS",
+            title: "Notes",
             buildTime: new Date().toISOString(),
             template: "public/index.html"
         }),

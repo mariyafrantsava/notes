@@ -3,6 +3,7 @@ import './add-note.scss';
 import {makeStyles} from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
+import TagContent from "../tag-content/tag-content";
 
 const AddNote = ({handleAddNote}) => {
     const useStyles = makeStyles((theme) => ({
@@ -13,15 +14,24 @@ const AddNote = ({handleAddNote}) => {
     const classes = useStyles();
 
     const [noteText, setNoteText] = useState('');
+    const [tagName, setTagName] = useState('');
 
     const handleChange = (event) => {
-        setNoteText(event.target.value)
+        let inputText = event.target.value;
+        setNoteText(inputText);
+
+        const tagRegExp = /(#+[a-zA-Z0-9]+\s)/gm;
+        const tag = inputText.match(tagRegExp);
+        if(tag){
+            setTagName(tag);
+        }
     }
 
     const handleSaveClick = () => {
         if(noteText.trim().length > 0){
-            handleAddNote(noteText);
+            handleAddNote(noteText, tagName);
             setNoteText('');
+            setTagName('');
         }
     }
     return(
@@ -34,7 +44,8 @@ const AddNote = ({handleAddNote}) => {
                 onChange={handleChange}>
             </textarea>
             <div className="note-footer">
-                <p>200 Remaining</p>
+                {/*<p>200 Remaining</p>*/}
+                <TagContent tagName={tagName}/>
                 <Button
                     variant="contained"
                     color="primary"
