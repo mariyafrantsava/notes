@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './add-note.scss';
-import {makeStyles} from "@material-ui/core/styles";
+import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import { green, purple } from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import TagContent from "../tag-content/tag-content";
@@ -11,6 +12,12 @@ const AddNote = ({handleAddNote}) => {
             margin: theme.spacing(1),
         },
     }));
+
+    const theme = createMuiTheme({
+        palette: {
+            primary: green,
+        },
+    });
     const classes = useStyles();
 
     const [noteText, setNoteText] = useState('');
@@ -46,15 +53,17 @@ const AddNote = ({handleAddNote}) => {
             <div className="note-footer">
                 {/*<p>200 Remaining</p>*/}
                 <TagContent tagName={tagName}/>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    className={classes.button}
-                    startIcon={<SaveIcon />}
-                    onClick={handleSaveClick}
-                >
-                    Save
-                </Button>
+                <ThemeProvider theme={theme}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        className={classes.button}
+                        startIcon={<SaveIcon />}
+                        onClick={handleSaveClick}
+                    >
+                        Save
+                    </Button>
+                </ThemeProvider>
             </div>
         </div>
     )

@@ -13,22 +13,22 @@ const App = () => {
         {
             id: "1",
             text: "My first note created 2!",
-            tags: [" ", ""]
+            tags: ["vbn", "iop"]
         },
         {
             id: "2",
             text: "My first note created 3!",
-            tags: [" ", ""]
+            tags: ["qwe", "rty"]
         },
         {
             id: "3",
             text: "My first note created 4!",
-            tags: [" ", ""]
+            tags: ["asd", "fgh"]
         },
         {
             id: "4",
             text: "My first new note!",
-            tags: [" ", ""]
+            tags: ["zxc", "vbn"]
         },
     ]);
 
@@ -64,6 +64,29 @@ const App = () => {
         setNotes(newNotes);
     }
 
+    const deleteTag = (eventId, id, text, tags) => {
+
+        console.log('id', id)
+        console.log('eventId', eventId.target.id-1)
+
+        const changeNote = {
+             id: id,
+             text: text,
+             tags: tags.filter((tag) => tag !== tags[eventId.target.id-1])
+        }
+        const changeNotes = [
+            ...notes.slice(0, id),
+            changeNote,
+            ...notes.slice(id + 1)
+        ];
+        console.log('changeNotes', changeNotes);
+        setNotes(changeNotes);
+    }
+
+    const editNote = (id) => {
+        console.log('Edit', id, 'note')
+    }
+
     return (
         <div className="container">
             <SearchTag handleSearchNote={setSearchTag}/>
@@ -73,7 +96,9 @@ const App = () => {
                     note.tags.join('').toLocaleLowerCase().includes(searchTag))
                 }
                 handleAddNote={addNote}
-                handleDeleteNote={deleteNote}/>
+                handleDeleteNote={deleteNote}
+                handleDeleteTag={deleteTag}
+                handleEditNote={editNote}/>
         </div>
     );
 }

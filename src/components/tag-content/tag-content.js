@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { makeStyles } from '@material-ui/core/styles';
 
-const TagContent = ({tagName, handleDeleteTag}) => {
+const TagContent = ({id, text, tagName, handleDeleteTag}) => {
     const useStyles = makeStyles((theme) => ({
         button: {
             margin: theme.spacing(1)
@@ -23,7 +23,7 @@ const TagContent = ({tagName, handleDeleteTag}) => {
                 <button
                     type="button"
                     id={startIdTag}
-                    onClick={() => handleDeleteTag(startIdTag - 1)}>
+                    onClick={(event)=> handleDeleteTag(event, id, text, tagName)}>
                     X
                 </button>
             </div>
