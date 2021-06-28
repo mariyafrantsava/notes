@@ -2,35 +2,11 @@ import React, {useEffect, useState} from "react";
 import './app.scss';
 import NotesList from "../notes-list/notes-list";
 import SearchTag from "../search-tag/search-tag";
+import dataNotes from "../../data-notes.json";
+
 
 const App = () => {
-    const [notes, setNotes] = useState([
-        {
-            id: "0",
-            text: "My first note created 1!",
-            tags: ["cat", "cap"]
-        },
-        {
-            id: "1",
-            text: "My first note created 2!",
-            tags: ["vbn", "iop"]
-        },
-        {
-            id: "2",
-            text: "My first note created 3!",
-            tags: ["qwe", "rty"]
-        },
-        {
-            id: "3",
-            text: "My first note created 4!",
-            tags: ["asd", "fgh"]
-        },
-        {
-            id: "4",
-            text: "My first new note!",
-            tags: ["zxc", "vbn"]
-        },
-    ]);
+    const [notes, setNotes] = useState(dataNotes);
 
     const [searchTag, setSearchTag] = useState('');
     useEffect(() =>{
