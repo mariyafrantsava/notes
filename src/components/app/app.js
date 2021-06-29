@@ -7,8 +7,8 @@ import dataNotes from "../../data-notes.json";
 
 const App = () => {
     const [notes, setNotes] = useState(dataNotes);
-
     const [searchTag, setSearchTag] = useState('');
+
     useEffect(() =>{
         const savedNotes = JSON.parse(
             localStorage.getItem('notes-data')
@@ -59,8 +59,22 @@ const App = () => {
         setNotes(changeNotes);
     }
 
-    const editNote = (id) => {
-        console.log('Edit', id, 'note')
+    const editNote = (idNote, text, tags) => {
+        console.log('edit note app')
+        console.log(idNote, text, tags)
+
+        const editSingleNote = {
+            id: idNote,
+            text: text,
+            tags: tags
+        }
+        const editNotes = [
+            ...notes.slice(0, idNote),
+            editSingleNote,
+            ...notes.slice(idNote + 1)
+        ];
+        console.log('changeNotes', editNotes);
+        setNotes(editNotes);
     }
 
     return (
@@ -74,7 +88,8 @@ const App = () => {
                 handleAddNote={addNote}
                 handleDeleteNote={deleteNote}
                 handleDeleteTag={deleteTag}
-                handleEditNote={editNote}/>
+                handleEditNote={editNote}
+            />
         </div>
     );
 }

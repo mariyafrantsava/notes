@@ -6,7 +6,12 @@ import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import TagContent from "../tag-content/tag-content";
 
-const AddNote = ({handleAddNote}) => {
+const AddNote = ({handleAddNote, idNoteEdit, textNoteEdit, tagsNoteEdit, isActiveNoteEdit, handleEditNote, setIsActiveNoteEdit, setIdNoteEdit, setTextNoteEdit, setTagsNoteEdit}) => {
+
+    // console.log('AddNote textNoteEdit', textNoteEdit)
+    // console.log('AddNote tagsNoteEdit', tagsNoteEdit)
+    console.log('AddNote isActiveNoteEdit', isActiveNoteEdit)
+
     const useStyles = makeStyles((theme) => ({
         button: {
             margin: theme.spacing(1),
@@ -36,10 +41,27 @@ const AddNote = ({handleAddNote}) => {
 
     const handleSaveClick = () => {
         if(noteText.trim().length > 0){
-            handleAddNote(noteText, tagName);
-            setNoteText('');
-            setTagName('');
+            if(isActiveNoteEdit){
+                handleEditNote(idNoteEdit, noteText, tagName);
+                setIsActiveNoteEdit(false);
+                setIdNoteEdit('');
+                setTextNoteEdit('');
+                setTagsNoteEdit([]);
+                console.log("!!!! setIsActiveNoteEdit", isActiveNoteEdit)
+            }
+            if(isActiveNoteEdit === false) {
+                handleAddNote(noteText, tagName);
+            }
+                setNoteText('');
+                setTagName('');
         }
+    }
+
+    const handleCancelEditClick = () => {
+        setIsActiveNoteEdit(false);
+        setIdNoteEdit('');
+        setTextNoteEdit('');
+        setTagsNoteEdit([]);
     }
     return(
         <div className="note new">
@@ -47,23 +69,33 @@ const AddNote = ({handleAddNote}) => {
                 rows="8"
                 cols="10"
                 placeholder="Type to add a note..."
-                value={noteText}
+                value={noteText || textNoteEdit}
                 onChange={handleChange}>
             </textarea>
             <div className="note-footer">
                 {/*<p>200 Remaining</p>*/}
-                <TagContent tagName={tagName}/>
-                <ThemeProvider theme={theme}>
-                    <Button
+                <TagContent tagName={tagName || tagsNoteEdit}/>
+                <div>
+                    {isActiveNoteEdit && (<Button
                         variant="contained"
-                        color="primary"
+                        color="default"
                         className={classes.button}
-                        startIcon={<SaveIcon />}
-                        onClick={handleSaveClick}
+                        onClick={handleCancelEditClick}
                     >
-                        Save
-                    </Button>
-                </ThemeProvider>
+                        Cancel Edit
+                    </Button>)}
+                    <ThemeProvider theme={theme}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            className={classes.button}
+                            startIcon={<SaveIcon />}
+                            onClick={handleSaveClick}
+                        >
+                            Save
+                        </Button>
+                    </ThemeProvider>
+                </div>
             </div>
         </div>
     )

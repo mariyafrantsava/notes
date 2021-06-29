@@ -5,13 +5,33 @@ import AddNote from "../add-note/add-note";
 
 const NotesList = ({notes, handleAddNote, handleDeleteNote, handleDeleteTag, handleEditNote}) => {
 
-    const [noteEdit, setNoteEdit] = useState(false);
+    const [isActiveNoteEdit, setIsActiveNoteEdit] = useState(false);
+    const [idNoteEdit, setIdNoteEdit] = useState('');
+    const [textNoteEdit, setTextNoteEdit] = useState('');
+    const [tagsNoteEdit, setTagsNoteEdit] = useState([]);
+
+    const transferEditValuesNote = (id, text, tags ) => {
+        // console.log('NotesList Edit', id)
+        // console.log('NotesList Edit text', text)
+        // console.log('NotesList Edit tags', tags)
+        setIdNoteEdit(id);
+        setTextNoteEdit(text);
+        setTagsNoteEdit(tags);
+        setIsActiveNoteEdit(true);
+    }
 
     return <div className='notes-list'>
                 <AddNote
                     handleAddNote={handleAddNote}
-                    noteEdit={noteEdit}
-                    handleSetNoteEdit={setNoteEdit}/>
+                    idNoteEdit={idNoteEdit}
+                    textNoteEdit={textNoteEdit}
+                    tagsNoteEdit={tagsNoteEdit}
+                    isActiveNoteEdit={isActiveNoteEdit}
+                    handleEditNote={handleEditNote}
+                    setIsActiveNoteEdit={setIsActiveNoteEdit}
+                    setIdNoteEdit={setIdNoteEdit}
+                    setTextNoteEdit={setTextNoteEdit}
+                    setTagsNoteEdit={setTagsNoteEdit}/>
 
                 {notes.map((note) => (
                         <Note
@@ -20,7 +40,7 @@ const NotesList = ({notes, handleAddNote, handleDeleteNote, handleDeleteTag, han
                             tags={note.tags}
                             handleDeleteNote={handleDeleteNote}
                             handleDeleteTag={handleDeleteTag}
-                            handleEditNote={handleEditNote}/>
+                            transferEditNote={transferEditValuesNote}/>
                     )
                 )}
             </div>

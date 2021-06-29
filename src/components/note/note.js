@@ -7,7 +7,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import './note.scss';
 import TagContent from "../tag-content/tag-content";
 
-const Note = ({id, text, tags, handleDeleteNote, handleDeleteTag, handleEditNote}) => {
+const Note = ({id, text, tags, handleDeleteNote, handleDeleteTag, transferEditNote}) => {
     const useStyles = makeStyles((theme) => ({
         button: {
             margin: theme.spacing(1),
@@ -39,7 +39,7 @@ const Note = ({id, text, tags, handleDeleteNote, handleDeleteTag, handleEditNote
                         color="default"
                         className={classes.button}
                         startIcon={<EditIcon />}
-                        onClick={() => handleEditNote(id)}
+                        onClick={() => transferEditNote(id, text, tags)}
                     >
                         Edit
                     </Button>
