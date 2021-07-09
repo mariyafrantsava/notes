@@ -1,7 +1,5 @@
 import React from 'react';
 import './tag-content.scss';
-import Button from "@material-ui/core/Button";
-import DeleteIcon from "@material-ui/icons/Delete";
 import { makeStyles } from '@material-ui/core/styles';
 
 const TagContent = ({id, text, tagName, handleDeleteTag}) => {

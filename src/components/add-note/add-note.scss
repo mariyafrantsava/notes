@@ -4,12 +4,46 @@
   min-height: 13rem;
 }
 
+.container-note-new{
+  height: 8rem;
+  background-color: #ffff;
+  margin-bottom: 1rem;
+}
+
 textarea{
   border: none;
   resize: none;
-  background-color: white;
+  background-color: transparent;
+  color: #444;
+  margin: 0;
+  border-radius: 0;
+  position: absolute;
+  z-index: 2;
 }
 
 textarea:focus{
   outline: none;
+}
+
+.backdrop {
+  width: 56.15rem;
+  overflow: auto;
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.highlights {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: transparent;
+  font-family: monospace;
+  font-size: 13.3333px;
+  padding: 2px 2px;
+}
+
+mark {
+  color: transparent;
+  background-color: #d4e9ab;
+  border-radius: 3px;
 }

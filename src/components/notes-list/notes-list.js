@@ -11,9 +11,6 @@ const NotesList = ({notes, handleAddNote, handleDeleteNote, handleDeleteTag, han
     const [tagsNoteEdit, setTagsNoteEdit] = useState([]);
 
     const transferEditValuesNote = (id, text, tags ) => {
-        // console.log('NotesList Edit', id)
-        // console.log('NotesList Edit text', text)
-        // console.log('NotesList Edit tags', tags)
         setIdNoteEdit(id);
         setTextNoteEdit(text);
         setTagsNoteEdit(tags);

@@ -1,27 +1,27 @@
  [
    {
      "id": 0,
-     "text": "My first note created 1!",
-     "tags": ["cat", "cap"]
+     "text": "...#My first note #created 1!",
+     "tags": ["#My ", "#created "]
    },
    {
      "id": 1,
      "text": "My first note created 2#vbn #iop !",
-     "tags": ["vbn", "iop"]
+     "tags": ["#vbn ", "#iop "]
    },
    {
      "id": 2,
-     "text": "My first note created 3!",
-     "tags": ["qwe", "rty"]
+     "text": "#My first note #created3 !",
+     "tags": ["#My ", "#created "]
    },
    {
      "id": 3,
-     "text": "My first note created 4!",
-     "tags": ["asd", "fgh"]
+     "text": "My first note created 4 #asd #fgh !",
+     "tags": ["#asd ", "#fgh "]
    },
    {
      "id": 4,
-     "text": "My first new note!",
-     "tags": ["zxc", "vbn"]
+     "text": "My #first new note!",
+     "tags": ["#first"]
    }
  ]

@@ -42,9 +42,6 @@ const App = () => {
 
     const deleteTag = (eventId, id, text, tags) => {
 
-        console.log('id', id)
-        console.log('eventId', eventId.target.id-1)
-
         const changeNote = {
              id: id,
              text: text,
@@ -55,13 +52,10 @@ const App = () => {
             changeNote,
             ...notes.slice(id + 1)
         ];
-        console.log('changeNotes', changeNotes);
         setNotes(changeNotes);
     }
 
     const editNote = (idNote, text, tags) => {
-        console.log('edit note app')
-        console.log(idNote, text, tags)
 
         const editSingleNote = {
             id: idNote,
@@ -73,7 +67,6 @@ const App = () => {
             editSingleNote,
             ...notes.slice(idNote + 1)
         ];
-        console.log('changeNotes', editNotes);
         setNotes(editNotes);
     }
 
