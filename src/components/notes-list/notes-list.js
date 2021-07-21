@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import './notes-list.scss';
 import Note from "../note/note"
 import AddNote from "../add-note/add-note";
-import {log} from "webpack-cli/lib/utils/logger";
 
 const NotesList = ({notes, handleAddNote, handleDeleteNote, handleDeleteTag, handleEditNote}) => {
 

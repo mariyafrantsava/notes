@@ -22,7 +22,7 @@ const AddNote = ({handleAddNote, idNoteEdit, textNoteEdit, tagsNoteEdit, isActiv
     const classes = useStyles();
 
     const [noteText, setNoteText] = useState('');
-    const [tagName, setTagName] = useState([]);
+    const [tagName, setTagName] = useState('');
 
     const handleChange = (event) => {
         let inputText = event.target.value;

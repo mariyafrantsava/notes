@@ -26,6 +26,9 @@ const App = () => {
     }, [notes]);
 
     const addNote = (text, tags) => {
+        if(tags.length === 0) {
+            tags = [];
+        }
         const newNote = {
             id: notes.some((note) => Number(note.id) === notes.length - 1) ?  notes.length.toString() : 0,
             text: text,
