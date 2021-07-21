@@ -30,7 +30,7 @@ const App = () => {
             id: notes.some((note) => Number(note.id) === notes.length - 1) ?  notes.length.toString() : 0,
             text: text,
             tags: tags
-        }
+    }
         const newNotes = [...notes, newNote];
         setNotes(newNotes);
     }

@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import './notes-list.scss';
 import Note from "../note/note"
 import AddNote from "../add-note/add-note";
+import {log} from "webpack-cli/lib/utils/logger";
 
 const NotesList = ({notes, handleAddNote, handleDeleteNote, handleDeleteTag, handleEditNote}) => {
 
@@ -28,7 +29,8 @@ const NotesList = ({notes, handleAddNote, handleDeleteNote, handleDeleteTag, han
                     setIsActiveNoteEdit={setIsActiveNoteEdit}
                     setIdNoteEdit={setIdNoteEdit}
                     setTextNoteEdit={setTextNoteEdit}
-                    setTagsNoteEdit={setTagsNoteEdit}/>
+                    setTagsNoteEdit={setTagsNoteEdit}
+                />
 
                 {notes.map((note) => (
                         <Note

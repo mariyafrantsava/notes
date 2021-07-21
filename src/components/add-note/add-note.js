@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import TagContent from "../tag-content/tag-content";
 
-const AddNote = ({handleAddNote, idNoteEdit, textNoteEdit, tagsNoteEdit, isActiveNoteEdit, handleEditNote, setIsActiveNoteEdit, setIdNoteEdit, setTextNoteEdit, setTagsNoteEdit}) => {
+const AddNote = ({handleAddNote, idNoteEdit, textNoteEdit, tagsNoteEdit, isActiveNoteEdit, handleEditNote, setIsActiveNoteEdit, setIdNoteEdit, setTextNoteEdit, setTagsNoteEdit, handleDeleteTag}) => {
 
     const useStyles = makeStyles((theme) => ({
         button: {
@@ -22,13 +22,14 @@ const AddNote = ({handleAddNote, idNoteEdit, textNoteEdit, tagsNoteEdit, isActiv
     const classes = useStyles();
 
     const [noteText, setNoteText] = useState('');
-    const [tagName, setTagName] = useState('');
+    const [tagName, setTagName] = useState([]);
 
     const handleChange = (event) => {
         let inputText = event.target.value;
         setNoteText(inputText);
 
-        const tagRegExp = /(#+[a-zA-Z0-9]+\s)/gm;
+        // const tagRegExp = /(#+[a-zA-Z0-9]+\s)/gm;
+        const tagRegExp = /(#+[a-zA-Z0-9]+)/gm;
         const tag = inputText.match(tagRegExp);
         if(tag){
             setTagName(tag);
@@ -55,8 +56,10 @@ const AddNote = ({handleAddNote, idNoteEdit, textNoteEdit, tagsNoteEdit, isActiv
     const handleCancelEditClick = () => {
         setIsActiveNoteEdit(false);
         setIdNoteEdit('');
+        setNoteText('');
         setTextNoteEdit('');
         setTagsNoteEdit([]);
+        // setTagName([]);
     }
 
     const getNewText = ( tagsNoteEdit, textNoteEdit) => {
@@ -122,16 +125,19 @@ const AddNote = ({handleAddNote, idNoteEdit, textNoteEdit, tagsNoteEdit, isActiv
 
             </div>
             <div className="note-footer">
-                <TagContent tagName={tagName || tagsNoteEdit}/>
+                <TagContent
+                    tagName={tagName || tagsNoteEdit}
+                />
                 <div>
-                    {isActiveNoteEdit && (<Button
+                    {/*{isActiveNoteEdit && (<Button*/}
+                    <Button
                         variant="contained"
                         color="default"
                         className={classes.button}
                         onClick={handleCancelEditClick}
                     >
                         Cancel Edit
-                    </Button>)}
+                    </Button>
                     <ThemeProvider theme={theme}>
                         <Button
                             variant="contained"
