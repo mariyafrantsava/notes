@@ -2,7 +2,7 @@ import React from 'react';
 import './tag-content.scss';
 import { makeStyles } from '@material-ui/core/styles';
 
-const TagContent = ({id, text, tagName, handleDeleteTag}) => {
+const TagContent = ({id, text, tagName, handleDeleteTag, transferEditNote}) => {
     const useStyles = makeStyles((theme) => ({
         button: {
             margin: theme.spacing(1)
@@ -21,7 +21,12 @@ const TagContent = ({id, text, tagName, handleDeleteTag}) => {
                 <button
                     type="button"
                     id={startIdTag}
-                    onClick={(event)=> handleDeleteTag(event, id, text, tagName)}>
+                    onClick={(event)=> {
+                        handleDeleteTag(event, id, text, tagName);
+                        console.log('tag-content tagName:', tagName, event.target);
+                        transferEditNote(id, text, ['tagName']);
+                    }
+                    }>
                     X
                 </button>
             </div>

@@ -11,6 +11,7 @@ const NotesList = ({notes, handleAddNote, handleDeleteNote, handleDeleteTag, han
     const [tagsNoteEdit, setTagsNoteEdit] = useState([]);
 
     const transferEditValuesNote = (id, text, tags ) => {
+        console.log('notes-list')
         setIdNoteEdit(id);
         setTextNoteEdit(text);
         setTagsNoteEdit(tags);
@@ -29,6 +30,8 @@ const NotesList = ({notes, handleAddNote, handleDeleteNote, handleDeleteTag, han
                     setIdNoteEdit={setIdNoteEdit}
                     setTextNoteEdit={setTextNoteEdit}
                     setTagsNoteEdit={setTagsNoteEdit}
+                    handleDeleteTag={handleDeleteTag}
+                    transferEditNote={transferEditValuesNote}
                 />
 
                 {notes.map((note) => (
@@ -38,7 +41,8 @@ const NotesList = ({notes, handleAddNote, handleDeleteNote, handleDeleteTag, han
                             tags={note.tags}
                             handleDeleteNote={handleDeleteNote}
                             handleDeleteTag={handleDeleteTag}
-                            transferEditNote={transferEditValuesNote}/>
+                            transferEditNote={transferEditValuesNote}
+                        />
                     )
                 )}
             </div>

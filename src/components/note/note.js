@@ -22,7 +22,8 @@ const Note = ({id, text, tags, handleDeleteNote, handleDeleteTag, transferEditNo
                     id={id}
                     text={text}
                     tagName={tags}
-                    handleDeleteTag={handleDeleteTag}/>
+                    handleDeleteTag={handleDeleteTag}
+                />
                 <div>
                     <Button
                         variant="contained"

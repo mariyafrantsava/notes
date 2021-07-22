@@ -56,6 +56,7 @@ const App = () => {
             ...notes.slice(id + 1)
         ];
         setNotes(changeNotes);
+        // transferEditValuesNote(id, text, tags);
     }
 
     const editNote = (idNote, text, tags) => {

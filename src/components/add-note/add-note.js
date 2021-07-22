@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import TagContent from "../tag-content/tag-content";
 
-const AddNote = ({handleAddNote, idNoteEdit, textNoteEdit, tagsNoteEdit, isActiveNoteEdit, handleEditNote, setIsActiveNoteEdit, setIdNoteEdit, setTextNoteEdit, setTagsNoteEdit, handleDeleteTag}) => {
+const AddNote = ({handleAddNote, idNoteEdit, textNoteEdit, tagsNoteEdit, isActiveNoteEdit, handleEditNote, setIsActiveNoteEdit, setIdNoteEdit, setTextNoteEdit, setTagsNoteEdit, handleDeleteTag, transferEditNote}) => {
 
     const useStyles = makeStyles((theme) => ({
         button: {
@@ -126,7 +126,11 @@ const AddNote = ({handleAddNote, idNoteEdit, textNoteEdit, tagsNoteEdit, isActiv
             </div>
             <div className="note-footer">
                 <TagContent
+                    id={idNoteEdit}
+                    text={textNoteEdit}
                     tagName={tagName || tagsNoteEdit}
+                    handleDeleteTag={handleDeleteTag}
+                    transferEditNote={transferEditNote}
                 />
                 <div>
                     {/*{isActiveNoteEdit && (<Button*/}
