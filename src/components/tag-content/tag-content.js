@@ -1,8 +1,7 @@
 import React from 'react';
 import './tag-content.scss';
 
-const TagContent = ({id, text, tagName, handleDeleteTag, transferEditNote, isActiveNoteEdit}) => {
-    console.log('TagContent tagName', tagName)
+const TagContent = ({id, text, tagName, handleDeleteTag, isActiveNoteEdit}) => {
 
     let allTags;
     if(tagName.length > 0) {
@@ -17,13 +16,11 @@ const TagContent = ({id, text, tagName, handleDeleteTag, transferEditNote, isAct
                     id={startIdTag}
                     onClick={(event)=> {
                         handleDeleteTag(event, id, text, tagName);
-                        // transferEditNote(id, text, tagName.filter((tag) => tag !== tagName[startIdTag-1]));
                     }}>
                     X
                 </button>)}
             </div>
         );
-
         });
 
     }

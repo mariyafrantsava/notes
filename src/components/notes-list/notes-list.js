@@ -5,20 +5,7 @@ import AddNote from "../add-note/add-note";
 
 const NotesList = ({notes, handleAddNote, handleDeleteNote, handleDeleteTag, handleEditNote,
                        idNoteEdit,textNoteEdit, tagsNoteEdit, isActiveNoteEdit, setIsActiveNoteEdit, setIdNoteEdit,
-                       setTextNoteEdit, setTagsNoteEdit, transferEditValuesNote }) => {
-
-    // const [isActiveNoteEdit, setIsActiveNoteEdit] = useState(false);
-    // const [idNoteEdit, setIdNoteEdit] = useState('');
-    // const [textNoteEdit, setTextNoteEdit] = useState('');
-    // const [tagsNoteEdit, setTagsNoteEdit] = useState([]);
-
-    // const transferEditValuesNote = (id, text, tags ) => {
-    //     console.log('notes-list')
-    //     setIdNoteEdit(id);
-    //     setTextNoteEdit(text);
-    //     setTagsNoteEdit(tags);
-    //     setIsActiveNoteEdit(true);
-    // }
+                       setTextNoteEdit, setTagsNoteEdit,noteText, setNoteText, tagName, setTagName, transferEditNote }) => {
 
     return <div className='notes-list'>
                 <AddNote
@@ -33,7 +20,10 @@ const NotesList = ({notes, handleAddNote, handleDeleteNote, handleDeleteTag, han
                     setTextNoteEdit={setTextNoteEdit}
                     setTagsNoteEdit={setTagsNoteEdit}
                     handleDeleteTag={handleDeleteTag}
-                    // transferEditNote={transferEditValuesNote}
+                    noteText={noteText}
+                    setNoteText={setNoteText}
+                    tagName={tagName}
+                    setTagName={setTagName}
                 />
 
                 {notes.map((note) => (
@@ -43,7 +33,7 @@ const NotesList = ({notes, handleAddNote, handleDeleteNote, handleDeleteTag, han
                             tags={note.tags}
                             handleDeleteNote={handleDeleteNote}
                             handleDeleteTag={handleDeleteTag}
-                            transferEditNote={transferEditValuesNote}
+                            transferEditNote={transferEditNote}
                         />
                     )
                 )}

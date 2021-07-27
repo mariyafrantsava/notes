@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import TagContent from "../tag-content/tag-content";
 
-const AddNote = ({handleAddNote, idNoteEdit, textNoteEdit, tagsNoteEdit, isActiveNoteEdit, handleEditNote, setIsActiveNoteEdit, setIdNoteEdit, setTextNoteEdit, setTagsNoteEdit, handleDeleteTag, transferEditNote}) => {
+const AddNote = ({handleAddNote, idNoteEdit, textNoteEdit, tagsNoteEdit, isActiveNoteEdit, handleEditNote, setIsActiveNoteEdit, setIdNoteEdit, setTextNoteEdit, setTagsNoteEdit, handleDeleteTag, transferEditNote, noteText, setNoteText, tagName, setTagName}) => {
 
     const useStyles = makeStyles((theme) => ({
         button: {
@@ -21,9 +21,6 @@ const AddNote = ({handleAddNote, idNoteEdit, textNoteEdit, tagsNoteEdit, isActiv
     });
     const classes = useStyles();
 
-    const [noteText, setNoteText] = useState('');
-    const [tagName, setTagName] = useState('');
-
     const handleChange = (event) => {
         let inputText = event.target.value;
         setNoteText(inputText);
@@ -36,31 +33,19 @@ const AddNote = ({handleAddNote, idNoteEdit, textNoteEdit, tagsNoteEdit, isActiv
     }
 
     const handleSaveClick = () => {
-        console.log('isActiveNoteEdit', isActiveNoteEdit)
-        if(isActiveNoteEdit){
-            console.log('hi1')
-            // handleEditNote(idNoteEdit, noteText, tagName);
-            setIsActiveNoteEdit(false);
-            setIdNoteEdit('');
-            setTextNoteEdit('');
-            setTagsNoteEdit([]);
-        }
-
         if(noteText.trim().length > 0){
             if(isActiveNoteEdit){
-                console.log('hi2')
                 handleEditNote(idNoteEdit, noteText, tagName);
-                setIsActiveNoteEdit(false);
-                setIdNoteEdit('');
-                setTextNoteEdit('');
-                setTagsNoteEdit([]);
             }
             if(isActiveNoteEdit === false) {
                 handleAddNote(noteText, tagName);
             }
-                setNoteText('');
-                setTagName('');
         }
+        setTextNoteEdit('');
+        setNoteText('');
+        setTagName('');
+        setTagsNoteEdit([]);
+        setIsActiveNoteEdit(false);
     }
 
     const handleCancelEditClick = () => {
@@ -69,7 +54,6 @@ const AddNote = ({handleAddNote, idNoteEdit, textNoteEdit, tagsNoteEdit, isActiv
         setNoteText('');
         setTextNoteEdit('');
         setTagsNoteEdit([]);
-        // setTagName([]);
     }
 
     const getNewText = ( tagsNoteEdit, textNoteEdit) => {
@@ -142,9 +126,9 @@ const AddNote = ({handleAddNote, idNoteEdit, textNoteEdit, tagsNoteEdit, isActiv
                     handleDeleteTag={handleDeleteTag}
                     transferEditNote={transferEditNote}
                     isActiveNoteEdit={isActiveNoteEdit}
+                    setIsActiveNoteEdit={setIsActiveNoteEdit}
                 />
                 <div>
-                    {/*{isActiveNoteEdit && (<Button*/}
                     <Button
                         variant="contained"
                         color="default"

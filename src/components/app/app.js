@@ -8,11 +8,12 @@ import dataNotes from "../../data-notes.json";
 const App = () => {
     const [notes, setNotes] = useState(dataNotes);
     const [searchTag, setSearchTag] = useState('');
-
     const [isActiveNoteEdit, setIsActiveNoteEdit] = useState(false);
     const [idNoteEdit, setIdNoteEdit] = useState('');
     const [textNoteEdit, setTextNoteEdit] = useState('');
     const [tagsNoteEdit, setTagsNoteEdit] = useState([]);
+    const [noteText, setNoteText] = useState('');
+    const [tagName, setTagName] = useState('');
 
     useEffect(() =>{
         const savedNotes = JSON.parse(
@@ -35,7 +36,7 @@ const App = () => {
             tags = [];
         }
         const newNote = {
-            id: notes.some((note) => Number(note.id) === notes.length - 1) ?  notes.length.toString() : 0,
+            id: notes.some((note) => Number(note.id) === notes.length - 1) ?  notes.length : 0,
             text: text,
             tags: tags
     }
@@ -49,50 +50,45 @@ const App = () => {
     }
 
     const deleteTag = (eventId, id, text, tags) => {
-        console.log('deleteTag eventId: ', eventId, 'id', id, 'tags', tags)
 
         let newTags = tags.filter((tag) => tag !== tags[eventId.target.id-1]);
         const changeNote = {
              id: id,
              text: text,
              tags: newTags
-        }
+        };
         const changeNotes = [
             ...notes.slice(0, id),
             changeNote,
             ...notes.slice(id + 1)
         ];
         setNotes(changeNotes);
-        // transferEditValuesNote(id, text, tags);
         setIdNoteEdit(id);
         setTextNoteEdit(text);
         setTagsNoteEdit(newTags);
-        console.log('newTags', newTags)
-        // setIsActiveNoteEdit(true);
+        setTagName(newTags);
     }
 
     const editNote = (idNote, text, tags) => {
 
-        const editSingleNote = {
+        let editSingleNote = {
             id: idNote,
             text: text,
             tags: tags
-        }
+        };
         const editNotes = [
             ...notes.slice(0, idNote),
             editSingleNote,
             ...notes.slice(idNote + 1)
         ];
         setNotes(editNotes);
-
         setIdNoteEdit(idNote);
         setTextNoteEdit(text);
         setTagsNoteEdit(tags);
-        // setIsActiveNoteEdit(true);
+        setTagName(tags);
     }
 
     const transferEditValuesNote = (id, text, tags ) => {
-        console.log('notes-list')
         setIdNoteEdit(id);
         setTextNoteEdit(text);
         setTagsNoteEdit(tags);
@@ -111,7 +107,6 @@ const App = () => {
                 handleDeleteNote={deleteNote}
                 handleDeleteTag={deleteTag}
                 handleEditNote={editNote}
-
                 idNoteEdit={idNoteEdit}
                 textNoteEdit={textNoteEdit}
                 tagsNoteEdit={tagsNoteEdit}
@@ -120,8 +115,11 @@ const App = () => {
                 setIdNoteEdit={setIdNoteEdit}
                 setTextNoteEdit={setTextNoteEdit}
                 setTagsNoteEdit={setTagsNoteEdit}
-                transferEditValuesNote={transferEditValuesNote}
-
+                noteText={noteText}
+                setNoteText={setNoteText}
+                tagName={tagName}
+                setTagName={setTagName}
+                transferEditNote={transferEditValuesNote}
             />
         </div>
     );
