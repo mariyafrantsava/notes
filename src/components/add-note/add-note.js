@@ -28,7 +28,6 @@ const AddNote = ({handleAddNote, idNoteEdit, textNoteEdit, tagsNoteEdit, isActiv
         let inputText = event.target.value;
         setNoteText(inputText);
 
-        // const tagRegExp = /(#+[a-zA-Z0-9]+\s)/gm;
         const tagRegExp = /(#+[a-zA-Z0-9]+)/gm;
         const tag = inputText.match(tagRegExp);
         if(tag){
@@ -37,8 +36,19 @@ const AddNote = ({handleAddNote, idNoteEdit, textNoteEdit, tagsNoteEdit, isActiv
     }
 
     const handleSaveClick = () => {
+        console.log('isActiveNoteEdit', isActiveNoteEdit)
+        if(isActiveNoteEdit){
+            console.log('hi1')
+            // handleEditNote(idNoteEdit, noteText, tagName);
+            setIsActiveNoteEdit(false);
+            setIdNoteEdit('');
+            setTextNoteEdit('');
+            setTagsNoteEdit([]);
+        }
+
         if(noteText.trim().length > 0){
             if(isActiveNoteEdit){
+                console.log('hi2')
                 handleEditNote(idNoteEdit, noteText, tagName);
                 setIsActiveNoteEdit(false);
                 setIdNoteEdit('');
@@ -131,6 +141,7 @@ const AddNote = ({handleAddNote, idNoteEdit, textNoteEdit, tagsNoteEdit, isActiv
                     tagName={tagName || tagsNoteEdit}
                     handleDeleteTag={handleDeleteTag}
                     transferEditNote={transferEditNote}
+                    isActiveNoteEdit={isActiveNoteEdit}
                 />
                 <div>
                     {/*{isActiveNoteEdit && (<Button*/}

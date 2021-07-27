@@ -3,20 +3,22 @@ import './notes-list.scss';
 import Note from "../note/note"
 import AddNote from "../add-note/add-note";
 
-const NotesList = ({notes, handleAddNote, handleDeleteNote, handleDeleteTag, handleEditNote}) => {
+const NotesList = ({notes, handleAddNote, handleDeleteNote, handleDeleteTag, handleEditNote,
+                       idNoteEdit,textNoteEdit, tagsNoteEdit, isActiveNoteEdit, setIsActiveNoteEdit, setIdNoteEdit,
+                       setTextNoteEdit, setTagsNoteEdit, transferEditValuesNote }) => {
 
-    const [isActiveNoteEdit, setIsActiveNoteEdit] = useState(false);
-    const [idNoteEdit, setIdNoteEdit] = useState('');
-    const [textNoteEdit, setTextNoteEdit] = useState('');
-    const [tagsNoteEdit, setTagsNoteEdit] = useState([]);
+    // const [isActiveNoteEdit, setIsActiveNoteEdit] = useState(false);
+    // const [idNoteEdit, setIdNoteEdit] = useState('');
+    // const [textNoteEdit, setTextNoteEdit] = useState('');
+    // const [tagsNoteEdit, setTagsNoteEdit] = useState([]);
 
-    const transferEditValuesNote = (id, text, tags ) => {
-        console.log('notes-list')
-        setIdNoteEdit(id);
-        setTextNoteEdit(text);
-        setTagsNoteEdit(tags);
-        setIsActiveNoteEdit(true);
-    }
+    // const transferEditValuesNote = (id, text, tags ) => {
+    //     console.log('notes-list')
+    //     setIdNoteEdit(id);
+    //     setTextNoteEdit(text);
+    //     setTagsNoteEdit(tags);
+    //     setIsActiveNoteEdit(true);
+    // }
 
     return <div className='notes-list'>
                 <AddNote
@@ -31,7 +33,7 @@ const NotesList = ({notes, handleAddNote, handleDeleteNote, handleDeleteTag, han
                     setTextNoteEdit={setTextNoteEdit}
                     setTagsNoteEdit={setTagsNoteEdit}
                     handleDeleteTag={handleDeleteTag}
-                    transferEditNote={transferEditValuesNote}
+                    // transferEditNote={transferEditValuesNote}
                 />
 
                 {notes.map((note) => (

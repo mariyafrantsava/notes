@@ -9,6 +9,11 @@ const App = () => {
     const [notes, setNotes] = useState(dataNotes);
     const [searchTag, setSearchTag] = useState('');
 
+    const [isActiveNoteEdit, setIsActiveNoteEdit] = useState(false);
+    const [idNoteEdit, setIdNoteEdit] = useState('');
+    const [textNoteEdit, setTextNoteEdit] = useState('');
+    const [tagsNoteEdit, setTagsNoteEdit] = useState([]);
+
     useEffect(() =>{
         const savedNotes = JSON.parse(
             localStorage.getItem('notes-data')
@@ -44,11 +49,13 @@ const App = () => {
     }
 
     const deleteTag = (eventId, id, text, tags) => {
+        console.log('deleteTag eventId: ', eventId, 'id', id, 'tags', tags)
 
+        let newTags = tags.filter((tag) => tag !== tags[eventId.target.id-1]);
         const changeNote = {
              id: id,
              text: text,
-             tags: tags.filter((tag) => tag !== tags[eventId.target.id-1])
+             tags: newTags
         }
         const changeNotes = [
             ...notes.slice(0, id),
@@ -57,6 +64,11 @@ const App = () => {
         ];
         setNotes(changeNotes);
         // transferEditValuesNote(id, text, tags);
+        setIdNoteEdit(id);
+        setTextNoteEdit(text);
+        setTagsNoteEdit(newTags);
+        console.log('newTags', newTags)
+        // setIsActiveNoteEdit(true);
     }
 
     const editNote = (idNote, text, tags) => {
@@ -72,6 +84,19 @@ const App = () => {
             ...notes.slice(idNote + 1)
         ];
         setNotes(editNotes);
+
+        setIdNoteEdit(idNote);
+        setTextNoteEdit(text);
+        setTagsNoteEdit(tags);
+        // setIsActiveNoteEdit(true);
+    }
+
+    const transferEditValuesNote = (id, text, tags ) => {
+        console.log('notes-list')
+        setIdNoteEdit(id);
+        setTextNoteEdit(text);
+        setTagsNoteEdit(tags);
+        setIsActiveNoteEdit(true);
     }
 
     return (
@@ -86,6 +111,17 @@ const App = () => {
                 handleDeleteNote={deleteNote}
                 handleDeleteTag={deleteTag}
                 handleEditNote={editNote}
+
+                idNoteEdit={idNoteEdit}
+                textNoteEdit={textNoteEdit}
+                tagsNoteEdit={tagsNoteEdit}
+                isActiveNoteEdit={isActiveNoteEdit}
+                setIsActiveNoteEdit={setIsActiveNoteEdit}
+                setIdNoteEdit={setIdNoteEdit}
+                setTextNoteEdit={setTextNoteEdit}
+                setTagsNoteEdit={setTagsNoteEdit}
+                transferEditValuesNote={transferEditValuesNote}
+
             />
         </div>
     );
